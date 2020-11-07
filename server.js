@@ -14,7 +14,6 @@ app.use(cors());
 // Routes
 const baseURL = "https://api.clashofclans.com/v1/players/%23";
 app.get("/api/players/:id", (req, res) => {
-	console.log("here");
 	try {
 		const fetchData = async () => {
 			const playerID = req.params.id;
