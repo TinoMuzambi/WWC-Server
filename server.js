@@ -12,12 +12,35 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-const baseURL = "https://api.clashofclans.com/v1/players/%23";
-app.get("/api/players/:id", (req, res) => {
+app.get("/api/player/:id", (req, res) => {
+	const baseURL = "https://api.clashofclans.com/v1/players/%23";
 	try {
 		const fetchData = async () => {
 			const playerID = req.params.id;
 			const result = await fetch(baseURL + playerID, {
+				headers: {
+					Accept: "*/*",
+					"content-type": "application/json; charset=utf-8",
+					Authorization: "Bearer " + process.env.CLASH_KEY,
+				},
+			});
+			const data = await result.json();
+			res.status(200).send(data);
+		};
+
+		fetchData();
+	} catch (error) {
+		console.error(error);
+		res.status(500).send(error);
+	}
+});
+
+app.get("/api/clan/:id", (req, res) => {
+	const baseURL = "https://api.clashofclans.com/v1/clans/%23";
+	try {
+		const fetchData = async () => {
+			const clanID = req.params.id;
+			const result = await fetch(baseURL + clanID, {
 				headers: {
 					Accept: "*/*",
 					"content-type": "application/json; charset=utf-8",
