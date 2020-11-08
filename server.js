@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const fetch = require("node-fetch");
+const HttpProxyAgent = require("http-proxy-agent");
 
 // Setup
 const app = express();
@@ -46,7 +47,7 @@ app.get("/api/clan/:id", (req, res) => {
 					"content-type": "application/json; charset=utf-8",
 					Authorization: "Bearer " + process.env.CLASH_KEY,
 				},
-				gent: new HttpsProxyAgent(process.env.FIXIE_URL),
+				agent: new HttpProxyAgent(process.env.FIXIE_URL),
 			});
 
 			const data = await result.json();
