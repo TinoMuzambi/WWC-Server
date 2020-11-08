@@ -47,6 +47,7 @@ app.get("/api/clan/:id", (req, res) => {
 					Authorization: "Bearer " + process.env.CLASH_KEY,
 				},
 			});
+
 			const data = await result.json();
 			res.status(200).send(data);
 		};
