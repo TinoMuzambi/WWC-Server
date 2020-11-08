@@ -46,6 +46,7 @@ app.get("/api/clan/:id", (req, res) => {
 					"content-type": "application/json; charset=utf-8",
 					Authorization: "Bearer " + process.env.CLASH_KEY,
 				},
+				gent: new HttpsProxyAgent(process.env.FIXIE_URL),
 			});
 
 			const data = await result.json();
