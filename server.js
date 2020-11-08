@@ -15,8 +15,6 @@ app.use(cors());
 // Routes
 app.get("/api/player/:id", (req, res) => {
 	const baseURL = "https://api.clashofclans.com/v1/players/%23" + req.params.id;
-	try {
-		const fetchData = async () => {
 			// const result = await fetch(baseURL, {
 			// 	headers: {
 			// 		"content-type": "application/json; charset=utf-8",
@@ -26,34 +24,30 @@ app.get("/api/player/:id", (req, res) => {
 			// const data = await result.json();
 			// res.status(200).send(data);
 
-			const options = {
-				proxy: process.env.HTTP_PROXY,
-				url: baseURL,
-					headers: {
-					"content-type": "application/json; charset=utf-8",
-					Authorization: "Bearer " + process.env.CLASH_KEY,
-				},
-			}
-
-			const cb = (error, response, body) => {
-				if (!error && response.statusCode == 200) {
-					console.log(body)
-					res.status(200).send(body)
-				}
-				else {
-					console.log(error);
-					res.status(500).send("Error yo")
-				}
-			}
-
-			request(options, cb);
-		};
-
-		fetchData();
-	} catch (error) {
-		console.error(error);
-		res.status(500).send(error);
+	const options = {
+		proxy: process.env.HTTP_PROXY,
+		url: baseURL,
+		headers: {
+			"content-type": "application/json; charset=utf-8",
+			Authorization: "Bearer " + process.env.CLASH_KEY,
+		}
 	}
+
+	const cb = (error, response, body) => {
+		console.log(response.statusCode);
+		console.log(body)
+		if (!error && response.statusCode == 200) {
+			console.log(body)
+			res.status(200).send(body)
+		}
+		else {
+			console.log(error);
+			res.status(500).send("Error yo")
+		}
+	}
+
+	request(options, cb);
+
 });
 
 app.get("/api/clan/:id", (req, res) => {
