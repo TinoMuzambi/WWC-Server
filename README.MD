@@ -8,4 +8,4 @@ The front-end code is available at this [URL](https://github.com/TinoMuzambi/Wor
 
 ## Deployment
 
-The server is deployed on Heroku at this [url](https://wwc-server.herokuapp.com/).
+The server is deployed on Heroku at this [URL](https://wwc-server.herokuapp.com/).
